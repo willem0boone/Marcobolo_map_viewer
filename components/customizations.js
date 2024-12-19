@@ -18,29 +18,29 @@ const sx = {
 }
 
 const Customizations = () => {
-  const colormap = useThemedColormap('warm')
-  const { dataset, clim, setClim, colormapName, setColormapName } =
-    useAppContext()
+  const { dataset, clim, setClim, colormapName, setColormapName } = useAppContext()
+  
+  const colormap = useThemedColormap(colormapName)
 
   return (
-    <ExpandingSection label='Customizations'>
-      <Box as='label' sx={sx.label}>
+    <ExpandingSection label="Customizations">
+      <Box as="label" sx={sx.label}>
         {dataset?.variable}
         <Colorbar
-          width='100%'
-          colormap={colormap}
+          width="100%"
+          colormap={colormap}   
           horizontal
           units={dataset?.units}
           clim={clim}
           setClim={setClim}
         />
       </Box>
-      <Box as='label' sx={sx.label}>
+      <Box as="label" sx={sx.label}>
         Colormap
         <Select
           value={colormapName}
-          onChange={(e) => setColormapName(e.target.value)}
-          size='xs'
+          onChange={(e) => setColormapName(e.target.value)}  
+          size="xs"
           sx={{ '& select': { width: '100%' } }}
         >
           {colormaps.map(({ name }) => (

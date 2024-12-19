@@ -1,39 +1,54 @@
 import { Column, Row, Select } from '@carbonplan/components'
-import { useAppContext } from './app-context'
-import { DATASETS } from '../data/dynamic-client'
 import { useEffect, useMemo } from 'react'
+import { useRouter } from 'next/router'
+import { useAppContext } from './app-context'
 
-const Projection = () => {
-  const { version, projection, setProjection } = useAppContext()
+const Projection = ({disabled}) => {
+  const router = useRouter()
+  const { dataset, setDataset, datasets, version, projection, setProjection } = useAppContext()
 
-  const projections = useMemo(() => {
-    return Array.from(
-      DATASETS.filter((d) => d.version === version).reduce(
-        (a, d) => a.add(d.projection),
-        new Set()
+    // Calculate projections based on the current version
+    const projections = useMemo(() => {
+      return Array.from(
+        datasets
+          .filter((d) => d.dataset === dataset)
+          .reduce((a, d) => a.add(d.projection), new Set()
+        )
       )
-    )
-  }, [version])
+    }, [datasets, dataset])
 
-  useEffect(() => {
-    if (projections.length === 1 && projections[0] !== projection) {
-      setProjection(projections[0])
+    useEffect(() => {
+      if (!dataset && datasets.length > 0) {
+        setDataset(datasets[0].id)
+      } else if (
+        !dataset?.hideInDropdown &&
+        datasets.length > 0 &&
+        !datasets.find((d) => d.id === dataset.id)
+      ) {
+        setDataset(null)
+      }
+    }, [dataset, datasets])
+  
+    if (!datasets) {
+      return null
     }
-  }, [projections, projection, setProjection])
+
 
   return (
     <Row columns={3}>
       <Column start={1} width={1}>
-        Projection
+        Timescale
       </Column>
       <Column start={2} width={2}>
-        <Select
-          onChange={(e) => setProjection(e.target.value)}
-          value={projection}
+      <Select
+          disabled={disabled}
+          onChange={(e) => setDataset(e.target.value)}
+          value={dataset?.id}
+          key={router.asPath}
         >
-          {projections.map((p) => (
-            <option key={p} value={p}>
-              {p}
+          {datasets.map((d) => (
+            <option key={d.id} value={d.id}>
+              {d.projection}
             </option>
           ))}
         </Select>

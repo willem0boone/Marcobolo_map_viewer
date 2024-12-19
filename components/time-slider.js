@@ -3,6 +3,8 @@ import { useAppContext } from './app-context'
 
 const TimeSlider = ({ disabled }) => {
   const { dataset, time, setTime } = useAppContext()
+  
+
 
   if (time == null) return null
 

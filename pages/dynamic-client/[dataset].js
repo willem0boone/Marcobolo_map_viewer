@@ -9,7 +9,7 @@ import EmptyState from '../../components/empty-state'
 
 const bucket = 'https://storage.googleapis.com/carbonplan-maps/'
 
-const base = 'https://minio.lab.dive.edito.eu/oidc-willemboone/marcobolo/'
+const base = 'https://minio.lab.dive.edito.eu/oidc-willemboone/marcobolo/viewer/'
 
 
 const DynamicClient = ({ dataset }) => {
@@ -23,6 +23,10 @@ const DynamicClient = ({ dataset }) => {
     setRegionData,
   } = useAppContext()
 
+
+  const ttime = dataset.timesteps[time]
+
+
   const { id, version, projection } = dataset || {}
   const colormap = useThemedColormap(colormapName)
   const router = useRouter()
@@ -32,13 +36,12 @@ const DynamicClient = ({ dataset }) => {
       return null
     }
 
-    const start = Math.floor(time / dataset.timeChunks) * dataset.timeChunks
+
     return {
-      time: Array(dataset.timeChunks)
-        .fill(null)
-        .map((d, i) => start + i),
+      time: dataset.timesteps
     }
   }, [dataset, time])
+
 
   if (!dataset || !variable) {
     return <EmptyState />
@@ -53,16 +56,14 @@ const DynamicClient = ({ dataset }) => {
         variable={'land'}
       />
 
- 
       <Raster
         key={id}
         colormap={colormap}
         clim={clim}
         mode={'texture'}
         source={base + id}
-        //source ={"https://minio.lab.dive.edito.eu/oidc-willemboone/marcobolo/new_pyramid3.zarr"}
         variable={variable}
-        selector={{ time }}
+        selector={{time: ttime}}
         regionOptions={{ setData: setRegionData, selector }}
       />
       {showRegionPicker && (
