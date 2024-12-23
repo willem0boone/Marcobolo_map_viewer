@@ -13,7 +13,7 @@ import { useAppContext } from './app-context'
 import ExpandingSection from './expanding-section'
 
 const TimeSeries = () => {
-  const { variable, showRegionPicker, setShowRegionPicker, regionData } =
+  const { variable, showRegionPicker, setShowRegionPicker, regionData , dataset} =
     useAppContext()
 
   const { data, range, domain } = useMemo(() => {
@@ -29,9 +29,24 @@ const TimeSeries = () => {
       const sum = filtered.reduce((a, d) => a + d, 0)
       const value = sum / filtered.length
 
+      let adjustedKey;
+
+
+      if (dataset.period == "Decade(21e century)"){
+        adjustedKey = (((Number(key) / 3653) + 2) * 10) // Divide the key by 3653
+      }
+
+      else if (dataset.period == "Month"){
+        adjustedKey = Math.floor(Number(key) / 30) +1;
+      }
+
+      else{
+        adjustedKey = Number(key)
+      }
+
       range = [Math.min(range[0], value), Math.max(range[1], value)]
-      domain = [Math.min(domain[0], key), Math.max(domain[1], key)]
-      return [Number(key), value]
+      domain = [Math.min(domain[0], adjustedKey), Math.max(domain[1], adjustedKey)]
+      return [adjustedKey, value]
     })
 
     return { data, range, domain }
@@ -54,8 +69,8 @@ const TimeSeries = () => {
             <Grid horizontal />
             <Grid vertical />
             <TickLabels left bottom />
-            <AxisLabel left>{variable}</AxisLabel>
-            <AxisLabel bottom>Time step</AxisLabel>
+            <AxisLabel left>Suitability</AxisLabel>
+            <AxisLabel bottom>{dataset.period}</AxisLabel>
             <Plot>
               <Line data={data} />
             </Plot>

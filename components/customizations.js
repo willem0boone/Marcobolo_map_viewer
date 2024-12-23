@@ -33,6 +33,7 @@ const Customizations = () => {
           units={dataset?.units}
           clim={clim}
           setClim={setClim}
+          setClimStep={0.01}
         />
       </Box>
       <Box as="label" sx={sx.label}>

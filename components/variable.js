@@ -5,9 +5,9 @@ import { useAppContext } from './app-context'
 const Variable = () => {
   const { dataset, setVariable, variable, variables } = useAppContext()
 
-  console.log("dataset in variable.js", dataset)
-  console.log("variable in variable.js", variable)
-  console.log("variables in variable.js", variables)
+  //console.log("dataset in variable.js", dataset)
+  //console.log("variable in variable.js", variable)
+  //console.log("variables in variable.js", variables)
 
 
   //useEffect(() => {

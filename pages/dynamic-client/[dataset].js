@@ -60,7 +60,8 @@ const DynamicClient = ({ dataset }) => {
         key={id}
         colormap={colormap}
         clim={clim}
-        mode={'texture'}
+        setClim={(clim)}
+        mode={'dotgrid'}
         source={base + id}
         variable={variable}
         selector={{time: ttime}}
