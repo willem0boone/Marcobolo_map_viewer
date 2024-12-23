@@ -6,15 +6,15 @@ import {
 import { Box, Flex } from 'theme-ui'
 import { useAppContext } from './app-context'
 // import Approach from './approach'
-import Chunking from './chunking'
 import Customizations from './customizations'
 import Datasets from './datasets'
 import Projection from './projection'
-import Sharding from './sharding'
+
 import TimeSeries from './time-series'
 import TimeSlider from './time-slider'
 import Variable from './variable'
 import Version from './version'
+
 
 const Sidebar = () => {
   const { approach, dataset } = useAppContext()
@@ -45,15 +45,14 @@ const Sidebar = () => {
       <Flex sx={{ flexDirection: 'column', gap: 4 }}>
         {approach === 'dynamic-client' && (
           <>
-            <Version />
 
-            <Projection />
+<Version />
 
-            <Sharding />
+<Projection />
 
-            <Chunking />
+<Variable />
 
-            <Variable />
+
           </>
         )}
 

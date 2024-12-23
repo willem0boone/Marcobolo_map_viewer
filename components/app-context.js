@@ -23,39 +23,36 @@ export const AppProvider = ({ dataset, datasets, children }) => {
   const [clim, setClim] = useState(dataset?.clim)
   const [version, setVersion] = useState(dataset?.version)
   const [projection, setProjection] = useState(dataset?.projection)
-  const [shardSize, setShardSize] = useState(dataset?.shardSize)
   const [colormapName, setColormapName] = useState('warm')
   const [showRegionPicker, setShowRegionPicker] = useState(false)
   const [regionData, setRegionData] = useState({ loading: true })
   const [approach] = router.pathname.split('/').filter(Boolean)
 
   const filteredDatasets = useMemo(() => {
+
     if (!datasets) {
       return
     }
     return datasets.filter((d) => {
       if (version && d.version !== version) {
         return false
-      } else if (projection && d.projection !== projection) {
-        return false
-      } else if (
-        typeof shardSize === 'number' &&
-        d.shardSize !== Number(shardSize)
-      ) {
-        return false
-      }
 
+      }
       return true
     })
-  }, [datasets, version, projection, shardSize])
+  }, [datasets, version, projection])
+
 
   useEffect(() => {
+
+
+
     if (dataset?.selectors?.time) {
+
       setTime(dataset?.selectors?.time[0])
       setClim(dataset?.clim)
       setVersion(dataset?.version)
       setProjection(dataset?.projection)
-      setShardSize(dataset?.shardSize)
       setRegionData({ loading: true })
     }
   }, [!!dataset])
@@ -63,7 +60,7 @@ export const AppProvider = ({ dataset, datasets, children }) => {
   const setApproach = useCallback((a) => {
     if (a === 'dynamic-client') {
 
-      const id = 'new_pyramid3.zarr'
+      const id = '137117_ensemble_decade_future_ssp245.zarr'
       setVariable(DATASETS.find((d) => d.id === id).variables[0])
       router.push(`/dynamic-client/${id}`)
     } else {
@@ -73,6 +70,7 @@ export const AppProvider = ({ dataset, datasets, children }) => {
 
   const setDataset = useCallback(
     (id) => {
+ 
       if (approach === 'dynamic-client') {
         setVariable(id ? datasets.find((d) => d.id === id).variables[0] : null)
         router.push({
@@ -86,6 +84,7 @@ export const AppProvider = ({ dataset, datasets, children }) => {
     },
     [approach, router.query, datasets]
   )
+
 
   return (
     <AppContext.Provider
@@ -107,8 +106,6 @@ export const AppProvider = ({ dataset, datasets, children }) => {
         setVersion,
         projection,
         setProjection,
-        shardSize,
-        setShardSize,
         showRegionPicker,
         setShowRegionPicker,
         regionData,

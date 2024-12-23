@@ -41,11 +41,7 @@ const App = ({ Component, pageProps }) => {
           }}
         >
           <Container>
-            <Header
-              menuItems={[
-                <Dimmer key='dimmer' sx={{ mt: '-2px', color: 'primary' }} />,
-              ]}
-            />
+     
           </Container>
         </Box>
 
