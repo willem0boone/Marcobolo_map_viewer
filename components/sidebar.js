@@ -27,17 +27,12 @@ const Sidebar = () => {
         </Box>
 
         <Box>
-           
-          
           For more information,
-          read the{' '}
-          <Link href='https://nasa-impact.github.io/zarr-visualization-report/'>
-            report
+          visit {' '}
+          <Link href='https://www.google.com'>
+            Google
           </Link>{' '}
-          or more about{' '}
-          <Link href='https://github.com/carbonplan/maps'>
-            @carbonplan/maps
-          </Link>
+ 
           .
         </Box>
       </Box>

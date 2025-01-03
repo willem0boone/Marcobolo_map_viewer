@@ -37,7 +37,7 @@ const TimeSeries = () => {
       }
 
       else if (dataset.period == "Month"){
-        adjustedKey = Math.floor(Number(key) / 30) +1;
+        adjustedKey = Math.floor(Number(key) / 30) + 1;
       }
 
       else{

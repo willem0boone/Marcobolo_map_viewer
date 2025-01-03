@@ -9,7 +9,7 @@ import EmptyState from '../../components/empty-state'
 
 const bucket = 'https://storage.googleapis.com/carbonplan-maps/'
 
-const base = 'https://minio.lab.dive.edito.eu/oidc-willemboone/marcobolo/viewer/'
+const base = 'https://minio.lab.dive.edito.eu/oidc-willemboone/marcobolo/viewer_/'
 
 
 const DynamicClient = ({ dataset }) => {
@@ -22,6 +22,8 @@ const DynamicClient = ({ dataset }) => {
     showRegionPicker,
     setRegionData,
   } = useAppContext()
+
+  //console.log(dataset)
 
 
   const ttime = dataset.timesteps[time]

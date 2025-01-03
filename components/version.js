@@ -40,7 +40,7 @@ const Version = () => {
           value={version}
         >
           <option value={'Harbor porpoise'}>Harbor porpoise</option>
-          <option value={'Harbor porpoise2'}>Harbor porpoise2</option>
+          {/* <option value={'Harbor porpoise2'}>Harbor porpoise2</option> */}
 
         </Select>
       </Column>
