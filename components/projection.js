@@ -2,32 +2,19 @@ import { Column, Row, Select } from '@carbonplan/components'
 import { useEffect, useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { useAppContext } from './app-context'
+import { DATASETS } from '../data/dynamic-client'
 
 const Projection = ({disabled}) => {
   const router = useRouter()
-  const { dataset, setDataset, datasets, version, projection, setProjection } = useAppContext()
+  const { dataset, setDataset, datasets, variable, setVariable} = useAppContext()
 
-    // Calculate projections based on the current version
-    const projections = useMemo(() => {
-      return Array.from(
-        datasets
-          .filter((d) => d.dataset === dataset)
-          .reduce((a, d) => a.add(d.projection), new Set()
-        )
-      )
-    }, [datasets, dataset])
+
 
     useEffect(() => {
       if (!dataset && datasets.length > 0) {
-        setDataset(datasets[0].id)
-      } else if (
-        !dataset?.hideInDropdown &&
-        datasets.length > 0 &&
-        !datasets.find((d) => d.id === dataset.id)
-      ) {
-        setDataset(null)
-      }
-    }, [dataset, datasets])
+        setDataset(datasets[0])
+      } 
+    }, [dataset, datasets, setDataset])
   
     if (!datasets) {
       return null

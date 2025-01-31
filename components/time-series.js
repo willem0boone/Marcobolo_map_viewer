@@ -11,10 +11,20 @@ import { useMemo } from 'react'
 
 import { useAppContext } from './app-context'
 import ExpandingSection from './expanding-section'
+import Projection from './projection'
 
 const TimeSeries = () => {
-  const { variable, showRegionPicker, setShowRegionPicker, regionData , dataset} =
+  const { variable, showRegionPicker, setShowRegionPicker, regionData , dataset, projection} =
     useAppContext()
+
+    console.log("^^^")
+    if(dataset){
+      console.log(dataset.id, projection, variable)
+    }
+    else{
+      console.log(dataset, projection, variable)
+    }
+
 
   const { data, range, domain } = useMemo(() => {
     if (!regionData?.value || !variable) {
@@ -23,6 +33,10 @@ const TimeSeries = () => {
 
     let domain = [Infinity, -Infinity]
     let range = [Infinity, -Infinity]
+
+    console.log("----")
+    console.log(dataset.id, projection, variable)
+
     const data = Object.keys(regionData.value[variable]).map((key) => {
       const values = regionData.value[variable][key]
       const filtered = values.filter((d) => d !== 9.969209968386869e36)
@@ -30,7 +44,6 @@ const TimeSeries = () => {
       const value = sum / filtered.length
 
       let adjustedKey;
-
 
       if (dataset.period == "Decade(21e century)"){
         adjustedKey = (((Number(key) / 3653) + 2) * 10) // Divide the key by 3653
@@ -50,7 +63,7 @@ const TimeSeries = () => {
     })
 
     return { data, range, domain }
-  }, [regionData, variable])
+  }, [regionData, variable, projection, dataset])
 
   return (
     <ExpandingSection
@@ -69,7 +82,7 @@ const TimeSeries = () => {
             <Grid horizontal />
             <Grid vertical />
             <TickLabels left bottom />
-            <AxisLabel left>Suitability</AxisLabel>
+            <AxisLabel left>{dataset.unit}</AxisLabel>
             <AxisLabel bottom>{dataset.period}</AxisLabel>
             <Plot>
               <Line data={data} />

@@ -18,12 +18,13 @@ import Version from './version'
 
 const Sidebar = () => {
   const { approach, dataset } = useAppContext()
+  console.log("hahahahahahahaha")
 
   return (
     <SidebarComponent expanded>
       <Box sx={{ mt: -4 }}>
         <Box as='h1' variant='styles.h4'>
-          THE WORLD IS FLAT!
+          THE WORLD IS FLAT or wathever title you want!
         </Box>
 
         <Box>

@@ -10,7 +10,7 @@ const UNUSED_ATTRS = {
 
 const SHARED_ATTRS = {
   ...UNUSED_ATTRS,
-  clim: [0, 1],
+
 }
 
 export const DATASETS = [
@@ -27,6 +27,8 @@ export const DATASETS = [
   selectors: {
     time: [0, 7],
   },
+  clim: [0, 1],
+  unit: "Suitability",
 },
 {
   ...SHARED_ATTRS,
@@ -40,6 +42,8 @@ export const DATASETS = [
   selectors: {
     time: [0, 7],
   },
+  clim: [0, 1],
+  unit: "Suitability",
 },
 {
   ...SHARED_ATTRS,
@@ -53,6 +57,8 @@ export const DATASETS = [
   selectors: {
     time: [0, 7],
   },
+  clim: [0, 1],
+  unit: "Suitability",
 },
 {
   ...SHARED_ATTRS,
@@ -66,6 +72,8 @@ export const DATASETS = [
   selectors: {
     time: [0, 7],
   },
+  clim: [0, 1],
+  unit: "Suitability",
 },
 {
   ...SHARED_ATTRS,
@@ -79,6 +87,8 @@ export const DATASETS = [
   selectors: {
     time: [0, 7],
   },
+  clim: [0, 1],
+  unit: "Suitability",
 },
 {
   ...SHARED_ATTRS,
@@ -92,6 +102,8 @@ export const DATASETS = [
   selectors: {
     time: [0, 7],
   },
+  clim: [0, 1],
+  unit: "Suitability",
 },
 {
   ...SHARED_ATTRS,
@@ -106,8 +118,25 @@ export const DATASETS = [
   selectors: {
     time: [0, 11],
   },
+  clim: [0, 1],
+  unit: "Suitability",
 },
+  {
 
+  ...SHARED_ATTRS,
+  id: 'mock_occ.zarr',
+  variables: ['Occurrences'],
+  version: 'Harbor porpoise',
+  projection: 'Monthly_obs',
+  timesteps: [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334],
+  labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
 
+  period: "Month",
+  selectors: {
+    time: [0, 11],
+  },
+  clim: [0, 500],
+  unit: "Occurrences",
 
+},
 ]

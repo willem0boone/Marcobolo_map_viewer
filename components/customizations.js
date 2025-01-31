@@ -19,6 +19,7 @@ const sx = {
 
 const Customizations = () => {
   const { dataset, clim, setClim, colormapName, setColormapName } = useAppContext()
+
   
   const colormap = useThemedColormap(colormapName)
 

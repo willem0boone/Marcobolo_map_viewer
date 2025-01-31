@@ -3,18 +3,18 @@ import { useEffect, useMemo } from 'react'
 import { useAppContext } from './app-context'
 
 const Variable = () => {
-  const { dataset, setVariable, variable, variables } = useAppContext()
-
-  //console.log("dataset in variable.js", dataset)
-  //console.log("variable in variable.js", variable)
-  //console.log("variables in variable.js", variables)
+  const { dataset, setVariable, variable, variables, datasets } = useAppContext()
 
 
-  //useEffect(() => {
-  //  if (variables.length === 1 && variables[0] !== variable) {
-  //    setVariable(variables[0])
-  //  }
-  //}, [variable, variables, setVariable])
+
+  useEffect(() => {
+    if (datasets.length === 1 && datasets[0] !== dataset) {
+      setVariable(datasets[0])
+    }
+  }, [dataset])
+
+  console.log("dataset in variable.js", dataset)
+  console.log("variable in variable.js", variable)
 
 
   return (

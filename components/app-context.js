@@ -72,6 +72,9 @@ export const AppProvider = ({ dataset, datasets, children }) => {
     (id) => {
  
       if (approach === 'dynamic-client') {
+        console.log('start')
+        console.log(dataset)
+        console.log(id)
         setVariable(id ? datasets.find((d) => d.id === id).variables[0] : null)
         router.push({
           pathname: `/dynamic-client/${id ?? ''}`,
